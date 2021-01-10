@@ -12,7 +12,7 @@ var voteForProducts = document.getElementById('display-products');
 function Product(name, path) {
     this.name = name;
     this.path = `img/` + path;
-    this.timesRendered=0;
+    this.randomlyTimesRendered = 0;
     this.votes = 0;
     arrOfProducts.push(this);
 }
@@ -21,6 +21,10 @@ function render(firstImgIndex, secondImgIndex, thirdImgIndex) {
     firstImage.setAttribute("src", arrOfProducts[firstImgIndex].path);
     secondImage.setAttribute("src", arrOfProducts[secondImgIndex].path);
     thirdImage.setAttribute("src", arrOfProducts[thirdImgIndex].path);
+
+    arrOfProducts[firstImgIndex].randomlyTimesRendered++;
+    arrOfProducts[secondImgIndex].randomlyTimesRendered++;
+    arrOfProducts[thirdImgIndex].randomlyTimesRendered++;
 }
 
 function genRandProduct() {
@@ -32,9 +36,7 @@ function genRandProduct() {
     // console.log(firstImgIndex);
     // console.log(secondImgIndex);
     // console.log(thirdImgIndex);
-    arrOfProducts[firstImgIndex].timesRendered++;
-    arrOfProducts[secondImgIndex].timesRendered++;
-    arrOfProducts[thirdImgIndex].timesRendered++;
+
 
     render(firstImgIndex, secondImgIndex, thirdImgIndex);
 }
@@ -48,7 +50,7 @@ new Product('breakfast', 'breakfast.jpg');
 new Product('bubblegum', 'bubblegum.jpg');
 new Product('chair', 'chair.jpg');
 new Product('cthulhu', 'cthulhu.jpg');
-new Product('dog duck', 'dog-duck.jpg');
+new Product('dog-duck', 'dog-duck.jpg');
 new Product('dragon', 'dragon.jpg');
 new Product('pet-sweep', 'pet-sweep.jpg');
 new Product('scissors', 'scissors.jpg');
@@ -58,49 +60,48 @@ new Product('tauntaun', 'tauntaun.jpg');
 new Product('unicorn', 'unicorn.jpg');
 new Product('usb', 'usb.gif');
 new Product('wine-glass', 'wine-glass.jpg');
-new Product('water can', 'water-can.jpg');
+new Product('water-can', 'water-can.jpg');
 
 console.log(arrOfProducts);
 
 function searchForProducts() {
-    if (trials != 0) {
-        for (var counter = 0; counter < arrOfProducts.length; counter++) {
-            if (arrOfProducts[counter].path === getProductSrc) {
-                arrOfProducts[counter].votes++;
+
+    for (var counter = 0; counter < arrOfProducts.length; counter++) {
+        if (arrOfProducts[counter].path === getProductSrc) {
+            arrOfProducts[counter].votes++;
+            if (trials != 0) {
                 genRandProduct();
+            } else {
+                voteForProducts.removeEventListener("click", startRenderProcess);
+                addResultButton();
             }
         }
-    } else {
-        voteForProducts.removeEventListener("click",startRenderProcess);
-        addResultButton();
     }
 }
 
-function addResultButton () {
+function addResultButton() {
     var button = document.createElement("button");
-    button.setAttribute("id","button");
+    button.setAttribute("id", "button");
     voteForProducts.appendChild(button);
-    button.innerHTML="Display Voting Results";
+    button.innerHTML = "Display Voting Results";
     button.addEventListener('click', displayResults);
-
 }
 
 
-function displayResults (event) {
+function displayResults(event) {
     var unOrderedList = document.createElement("ul");
     voteForProducts.appendChild(unOrderedList);
 
-    for (var counter2 = 0; counter2 < arrOfProducts.length; counter2++){
+    for (var counter2 = 0; counter2 < arrOfProducts.length; counter2++) {
         var listOfResults = document.createElement("li");
-        listOfResults.textContent = arrOfProducts[counter2].name + " number of times renered, number of votes = " + arrOfProducts[counter2].timesRendered +", "+ arrOfProducts[counter2].votes;
-        unOrderedList.appendChild(listOfResults); 
+        listOfResults.textContent = arrOfProducts[counter2].name + " number of times renered, number of votes = " + arrOfProducts[counter2].randomlyTimesRendered + ", " + arrOfProducts[counter2].votes;
+        unOrderedList.appendChild(listOfResults);
     }
 }
 
-function startRenderProcess (event) {
+function startRenderProcess(event) {
     var checkId = event.target.id;
     // console.log(checkId);
-
     if (checkId === "first-img" || checkId === "second-img" || checkId === "third-img") {
         trials--;
         getProductSrc = event.target.getAttribute('src');
