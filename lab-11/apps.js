@@ -5,7 +5,7 @@ var firstImage = document.getElementById("first-img");
 var secondImage = document.getElementById("second-img");
 var thirdImage = document.getElementById("third-img");
 var getProductSrc = 0;
-var trials = 3;
+var trials = 25;
 var voteForProducts = document.getElementById('display-products');
 
 
