@@ -41,6 +41,7 @@ function genRandProduct() {
     render(firstImgIndex, secondImgIndex, thirdImgIndex);
 }
 
+
 new Product('bag', 'bag.jpg');
 new Product('pen', 'pen.jpg');
 new Product('banana', 'banana.jpg');
@@ -61,6 +62,10 @@ new Product('unicorn', 'unicorn.jpg');
 new Product('usb', 'usb.gif');
 new Product('wine-glass', 'wine-glass.jpg');
 new Product('water-can', 'water-can.jpg');
+
+
+// initialize the images
+genRandProduct();
 
 console.log(arrOfProducts);
 
