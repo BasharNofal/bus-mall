@@ -1,0 +1,58 @@
+header h1 {
+    width: 100%;
+    padding: 10px;
+    color: grey;
+    background-color: black;
+    text-align: center;
+}
+
+body main {
+    width: 70%;
+    margin: auto;
+    text-align: center;
+}
+
+body main img {
+    width: 20%;
+    display: inline;
+    margin: 10px;
+    margin-top: 40px;
+    height: 200px;
+    box-shadow:2px 2px 6px black;
+}
+
+body main img:hover {
+    border: grey solid 1px;
+}
+
+body main img:active {
+    border: darkred solid 2px;
+}
+
+#button {
+    display: block;
+    margin: auto;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: grey;
+    font-size: 15px;
+    font-weight: bolder;
+    transition: 1s;
+}
+
+#button:hover {
+    transition-property: color, border-radius, background-color;
+    transition-duration: 0.5s,0.5s,0.5s;
+    transition-timing-function: linear,linear,linear;
+    color: white;
+    background-color: green;
+    border-radius: 10px;
+}
+
+#button:active {
+    transition-property: outline;
+    transition-duration: 0.5s;
+    transition-timing-function: linear;
+    
+    outline: solid black 5px;
+}
